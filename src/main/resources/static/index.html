@@ -31,14 +31,14 @@
             max-width: 500px;
             margin-bottom: 20px;
         }
-        .form-container textarea, .form-container input {
+        textarea, input {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
             margin-bottom: 10px;
         }
-        .form-container button {
+        button {
             background: #1DA1F2;
             color: #fff;
             border: none;
@@ -54,10 +54,6 @@
         .tweet-item:last-child {
             border-bottom: none;
         }
-        .logo {
-            width: 200px; /* Ajusta el tamaño según sea necesario */
-            margin-bottom: 20px;
-        }
         .modal {
             display: none;
             position: fixed;
@@ -66,8 +62,6 @@
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
             padding-top: 60px;
         }
@@ -95,111 +89,168 @@
     </style>
 </head>
 <body>
-    <div id="nameModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('nameModal')">&times;</span>
-            <h2>Ingrese su nombre</h2>
-            <input type="text" id="modalUsername" placeholder="Nombre de usuario">
-            <button onclick="submitName()">Enviar</button>
-        </div>
+
+<h1>Mini Twitter</h1>
+<button id="authButton" onclick="handleAuth()">Iniciar Sesión</button>
+
+<div class="form-container">
+    <h2>Nuevo Tweet</h2>
+    <input type="text" id="username" placeholder="Nombre de usuario" readonly>
+    <textarea id="content" rows="4" maxlength="140" placeholder="¿Qué está pasando?"></textarea>
+    <button onclick="postTweet()">Publicar</button>
+</div>
+
+<div class="tweet-list" id="tweetList">
+    <h2>Lista de Tweets</h2>
+    <!-- Aquí se insertarán dinámicamente los tweets -->
+</div>
+
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>No puedes publicar sin iniciar sesión</h2>
+        <p>Debes iniciar sesión para poder twittear.</p>
+        <button onclick="login()">Iniciar Sesión</button>
     </div>
+</div>
 
-    <h1>Mini Twitter</h1>
-    <h2 id="greetingMessage" style="display: none;"></h2>
-    <div class="form-container" id="tweetSection" style="display: none;">
-        <h2>Nuevo Tweet</h2>
-        <input type="text" id="username" placeholder="Nombre de usuario" readonly>
-        <textarea id="content" rows="4" maxlength="140" placeholder="¿Qué está pasando?"></textarea>
-        <button onclick="postTweet()">Publicar</button>
-    </div>
-    <div class="tweet-list" id="tweetList">
-        <h2>Lista de Tweets</h2>
-        <!-- Aquí se insertarán dinámicamente los tweets -->
-    </div>
+<script>
+    const API_URL = "http://localhost:8080/twitter";
+    const COGNITO_CLIENT_ID = "2vccsi2pfvafbefkdusf3rc5fn";
+    const COGNITO_DOMAIN = "https://us-east-2cxgzn6rk6.auth.us-east-2.amazoncognito.com";
+    const REDIRECT_URI = "http://localhost:8080/auth/callback";
+    const baseUrl = window.location.origin;
 
-    <script>
-        const baseUrl = window.location.origin;
+    function login() {
+        window.location.href = `${COGNITO_DOMAIN}/login?client_id=${COGNITO_CLIENT_ID}&response_type=code&scope=email+openid&redirect_uri=${REDIRECT_URI}`;
+    }
 
-        function postTweet() {
-            const content = document.getElementById('content').value;
-            const username = document.getElementById('username').value;
+    function logout() {
+        localStorage.removeItem("access_token");
+        window.location.reload();
+    }
 
-            if (!content) {
-                alert('El contenido es obligatorio.');
-                return;
-            }
+    function isAuthenticated() {
+        return localStorage.getItem("access_token") !== null;
+    }
 
-            if (content.length > 140) {
-                alert('El contenido no puede exceder los 140 caracteres.');
-                return;
-            }
+    function getTokenFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("token");
+    }
 
-            if (!username) {
-                alert('El nombre de usuario es obligatorio.');
-                return;
-            }
+    function postTweet() {
+        const content = document.getElementById('content').value;
+        const username = document.getElementById('username').value;
+        const accessToken = localStorage.getItem("access_token"); // Recuperamos el token
 
-            const tweet = { text: content, username: username };
+        if (!content) {
+            alert('El contenido es obligatorio.');
+            return;
+        }
 
-            fetch(`${baseUrl}/twitter/createPost`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(tweet)
+        if (content.length > 140) {
+            alert('El contenido no puede exceder los 140 caracteres.');
+            return;
+        }
+
+        if (!username) {
+            alert('El nombre de usuario es obligatorio.');
+            return;
+        }
+
+        if (!accessToken) {
+            alert("Debes iniciar sesión para twittear.");
+            openModal();
+            return;
+        }
+
+        console.log("Token que se enviará:", accessToken);
+
+        const tweet = { text: content, username: username };
+
+        fetch(`${baseUrl}/twitter/createPost`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(tweet)
+        })
+            .then(response => {
+                console.log("Respuesta del servidor:", response);
+                if (!response.ok) {
+                    throw new Error(`Error al publicar tweet: ${response.status}`);
+                }
+                return response.json();
             })
-            .then(response => response.json())
             .then(data => {
                 alert('Tweet publicado correctamente');
                 loadTweets();
                 document.getElementById('content').value = '';
             })
             .catch(error => console.error('Error al publicar el tweet:', error));
-        }
+    }
 
-        function loadTweets() {
-            fetch(`${baseUrl}/twitter/getPosts`)
-                .then(response => response.json())
-                .then(tweets => {
-                    const tweetList = document.getElementById('tweetList');
-                    tweetList.innerHTML = '<h2>Lista de Tweets</h2>'; // Limpiar la lista antes de agregar nuevos tweets
 
+
+    function loadTweets() {
+        fetch(`${baseUrl}/twitter/getPosts`)
+            .then(response => response.json())
+            .then(tweets => {
+                if (!Array.isArray(tweets)) {
+                    console.error("La respuesta del servidor no es un array:", tweets);
+                    tweets = []; // Si no es un array, lo convertimos en un array vacío.
+                }
+
+                const tweetList = document.getElementById('tweetList');
+                tweetList.innerHTML = '<h2>Lista de Tweets</h2>'; // Limpiar la lista antes de agregar nuevos tweets
+
+                if (tweets.length === 0) {
+                    tweetList.innerHTML += "<p>No hay tweets aún.</p>";
+                } else {
                     tweets.forEach(tweet => {
                         const tweetItem = document.createElement('div');
                         tweetItem.className = 'tweet-item';
                         tweetItem.textContent = `${tweet.user.username}: ${tweet.text}`;
                         tweetList.appendChild(tweetItem);
                     });
-                })
-                .catch(error => console.error('Error al cargar los tweets:', error));
+                }
+            })
+            .catch(error => console.error('Error al cargar los tweets:', error));
+    }
+
+
+    function handleAuth() {
+        if (isAuthenticated()) {
+            logout();
+        } else {
+            login();
+        }
+    }
+
+    function openModal() {
+        document.getElementById("authModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("authModal").style.display = "none";
+    }
+
+    window.onload = function() {
+        const token = getTokenFromUrl();
+        if (token) {
+            localStorage.setItem("access_token", token);
+            window.history.replaceState({}, document.title, "/");
         }
 
-        function submitName() {
-            const username = document.getElementById('modalUsername').value;
-            if (!username) {
-                alert('El nombre de usuario es obligatorio.');
-                return;
-            }
-            document.getElementById('username').value = username;
-            document.getElementById('greetingMessage').textContent = `Hola, ${username}!`;
-            document.getElementById('greetingMessage').style.display = 'block';
-            document.getElementById('tweetSection').style.display = 'block';
-            closeModal('nameModal');
+        if (isAuthenticated()) {
+            document.getElementById("authButton").textContent = "Cerrar Sesión";
+            document.getElementById("username").value = "Usuario Autenticado";
         }
 
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        // Mostrar el modal de nombre al cargar la página
-        window.onload = function() {
-            openModal('nameModal');
-            loadTweets();
-        };
-    </script>
+        loadTweets();
+    };
+</script>
 </body>
 </html>
