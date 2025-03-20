@@ -3,11 +3,9 @@ package com.example.twitter.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.twitter.model.Post;
 import com.example.twitter.model.PostRequest;
@@ -20,10 +18,10 @@ public class TwitterController {
     private final Stream stream = new Stream();
 
     @PostMapping("/createPost")
-    public Post createPost(@RequestBody PostRequest postRequest) {
+    public Post createPost(@RequestBody PostRequest postRequest, @AuthenticationPrincipal Jwt jwt) {
         User user = new User();
-        user.setId(UUID.randomUUID().toString());
-        user.setUsername(postRequest.getUsername());
+        user.setId(jwt.getSubject());
+        user.setUsername(jwt.getClaim("cognito:username"));
 
         Post post = new Post(UUID.randomUUID().toString(), postRequest.getText(), user);
         stream.addPost(post);
@@ -36,3 +34,4 @@ public class TwitterController {
     }
 
 }
+
