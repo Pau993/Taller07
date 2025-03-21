@@ -102,7 +102,6 @@
 
 <div class="tweet-list" id="tweetList">
     <h2>Lista de Tweets</h2>
-    <!-- Aquí se insertarán dinámicamente los tweets -->
 </div>
 
 <div id="authModal" class="modal">
@@ -142,7 +141,12 @@
     function postTweet() {
         const content = document.getElementById('content').value;
         const username = document.getElementById('username').value;
-        const accessToken = localStorage.getItem("access_token"); // Recuperamos el token
+        const accessToken = localStorage.getItem("access_token");
+
+        if (!accessToken) {
+            openModal();
+            return;
+        }
 
         if (!content) {
             alert('El contenido es obligatorio.');
@@ -159,12 +163,6 @@
             return;
         }
 
-        if (!accessToken) {
-            alert("Debes iniciar sesión para twittear.");
-            openModal();
-            return;
-        }
-
         console.log("Token que se enviará:", accessToken);
 
         const tweet = { text: content, username: username };
@@ -172,18 +170,11 @@
         fetch(`${baseUrl}/twitter/createPost`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(tweet)
         })
-            .then(response => {
-                console.log("Respuesta del servidor:", response);
-                if (!response.ok) {
-                    throw new Error(`Error al publicar tweet: ${response.status}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 alert('Tweet publicado correctamente');
                 loadTweets();
@@ -192,34 +183,21 @@
             .catch(error => console.error('Error al publicar el tweet:', error));
     }
 
-
-
     function loadTweets() {
         fetch(`${baseUrl}/twitter/getPosts`)
             .then(response => response.json())
             .then(tweets => {
-                if (!Array.isArray(tweets)) {
-                    console.error("La respuesta del servidor no es un array:", tweets);
-                    tweets = []; // Si no es un array, lo convertimos en un array vacío.
-                }
-
                 const tweetList = document.getElementById('tweetList');
-                tweetList.innerHTML = '<h2>Lista de Tweets</h2>'; // Limpiar la lista antes de agregar nuevos tweets
-
-                if (tweets.length === 0) {
-                    tweetList.innerHTML += "<p>No hay tweets aún.</p>";
-                } else {
-                    tweets.forEach(tweet => {
-                        const tweetItem = document.createElement('div');
-                        tweetItem.className = 'tweet-item';
-                        tweetItem.textContent = `${tweet.user.username}: ${tweet.text}`;
-                        tweetList.appendChild(tweetItem);
-                    });
-                }
+                tweetList.innerHTML = '<h2>Lista de Tweets</h2>';
+                tweets.forEach(tweet => {
+                    const tweetItem = document.createElement('div');
+                    tweetItem.className = 'tweet-item';
+                    tweetItem.textContent = `${tweet.user.username}: ${tweet.text}`;
+                    tweetList.appendChild(tweetItem);
+                });
             })
             .catch(error => console.error('Error al cargar los tweets:', error));
     }
-
 
     function handleAuth() {
         if (isAuthenticated()) {
