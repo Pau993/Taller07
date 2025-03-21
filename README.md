@@ -87,8 +87,6 @@ Diagrama de entidades:
 
 ---
 
-https://github.com/user-attachments/assets/2e734913-0225-4fd7-81df-5fb38f434bac
-
 ## 4. Video de la Aplicación Funcionando
 
 https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
