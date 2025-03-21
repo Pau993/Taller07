@@ -197,4 +197,14 @@ https://github.com/user-attachments/assets/ff07d82e-6469-44d2-8bc4-4f197328db2c
 ## 9. Conclusión 📊
 Este proyecto implementa un clon básico de Twitter con autenticación segura mediante AWS Cognito y un backend modular desplegado en AWS Lambda. La arquitectura permite escalabilidad y facilita la evolución futura de la aplicación.
 
+## Autores ✒️
 
+* *Paula Natalia Paez Vega*, *Miguel Camilo Tellez*, *Jhon Sebastian Sosa* - *Initial work* - [Paulinguis993](https://github.com/Paulinguis993)
+
+## Licencia 📄
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Agradecimientos 🎁
+
+Agradecimientos al profeso Daniel Benavides por brindarme sus conocimientos.
