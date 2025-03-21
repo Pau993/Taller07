@@ -113,6 +113,8 @@ https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
 2. Subir el archivo `JAR` generado con `mvn clean package`.
 3. Configurar el entorno de ejecución en Lambda (Java 17).
 
+https://github.com/user-attachments/assets/992d84cc-572f-4bc9-89dc-49909474def1
+
 ---
 
 ## 7. Separación en Microservicios
