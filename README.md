@@ -79,20 +79,44 @@ Diagrama de entidades:
 https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
 
 ---
+## 5. Seguridad con AWS Cognito
+1. Crear un usuario en AWS Cognito.
+2. Configurar el dominio y redirigir la URL de autenticación.
+3. Configurar los permisos de acceso a los endpoints protegidos.
+4. Enviar el token desde el frontend en las solicitudes HTTP mediante el header `Authorization: Bearer <token>`.
 
-## 5. Despliegue en AWS
+---
+## 6. Despliegue en AWS
 
-### 5.1. Despliegue del Frontend en AWS S3
+### 6.1. Despliegue del Frontend en AWS S3
 1. Crear un bucket S3 y habilitar alojamiento web.
-2. Subir los archivos:
-
+2. Subir los archivos del frontend al bucket.
 3. Acceder a la URL pública del bucket.
+
+### 6.2. Despliegue del Backend en AWS Lambda
+1. Crear una función Lambda para el backend.
+2. Subir el archivo `JAR` generado con `mvn clean package`.
+3. Configurar el entorno de ejecución en Lambda (Java 17).
 
 ---
 
-## 6. Próximos Pasos
+## 7. Separación en Microservicios
+1. Crear tres microservicios independientes:
+   - **UserService**: Para gestionar usuarios.
+   - **PostService**: Para crear y obtener posts.
+   - **StreamService**: Para gestionar el flujo de publicaciones.
+2. Utilizar Spring Cloud y AWS Lambda para desplegar cada microservicio.
 
-- **Desplegar el backend en AWS Lambda con API Gateway.**
-- **Separar en microservicios con AWS Lambda.**
-- **Agregar autenticación con JWT y AWS Cognito.**
+---
+
+## 8. Pruebas Finales
+1. Verificar que la autenticación funcione correctamente.
+2. Probar que las publicaciones solo se creen si el token es válido.
+3. Asegurar que la aplicación se despliegue y funcione correctamente desde AWS.
+
+---
+
+## 9. Conclusión
+Este proyecto implementa un clon básico de Twitter con autenticación segura mediante AWS Cognito y un backend modular desplegado en AWS Lambda. La arquitectura permite escalabilidad y facilita la evolución futura de la aplicación.
+
 
