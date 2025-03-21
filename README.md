@@ -12,18 +12,12 @@ Este proyecto es un clon básico de Twitter que permite a los usuarios crear pub
 
 ---
 
-## 1. Código Fuente
-
-El código fuente del proyecto está disponible en GitHub:
-
-🔗 [Repositorio en GitHub](URL_DEL_REPOSITORIO)
-
 Para clonar el repositorio y ejecutarlo localmente:
 
 ```sh
-git clone URL_DEL_REPOSITORIO
-cd twitter-clone
-git checkout nombre-de-la-rama
+git clone https://github.com/Pau993/Taller07.git
+cd Taller07
+git checkout main
 mvn clean package
 java -jar target/twitter-0.0.1-SNAPSHOT.jar
 ```
@@ -82,7 +76,7 @@ Diagrama de entidades:
 
 ## 4. Video de la Aplicación Funcionando
 
-📹 [Ver Video de la Aplicación](URL_DEL_VIDEO)
+https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
 
 ---
 
