@@ -24,9 +24,9 @@ java -jar target/twitter-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 2. Arquitectura del Proyecto
+## 2. Arquitectura del Proyecto 👜
 
-### 2.1. Arquitectura General
+### 2.1. Arquitectura General 📈
 
 El proyecto sigue un diseño monolítico en Spring Boot con un frontend estático en AWS S3. La aplicación se divide en:
 
@@ -34,13 +34,13 @@ El proyecto sigue un diseño monolítico en Spring Boot con un frontend estátic
 - **Frontend (JavaScript)**: Consume la API para mostrar y crear posts.
 - **AWS S3**: Aloja el frontend y lo hace accesible públicamente.
 
-### 2.2. Modelo de Datos
+### 2.2. Modelo de Datos 📁
 
 - `User`: Representa a un usuario del sistema.
 - `Post`: Representa una publicación de hasta 140 caracteres.
 - `Stream`: Almacena todos los posts creados.
 
-### 2.3. Diagrama de arquitectura
+### 2.3. Diagrama de arquitectura 📄
 
 ![image](https://github.com/user-attachments/assets/0e53c26e-5d3e-4ce0-8d0c-1abab00ba260)
 
@@ -53,7 +53,7 @@ El diagrama representa un flujo de interacción entre un usuario y un servicio w
 AWS Server Migration Service: Se encarga de gestionar la migración de servidores y recursos hacia la nube de AWS.
 * Comunicación HTTP: Finalmente, la información es enviada mediante HTTP a otro servicio o sistema, posiblemente relacionado con Twitter o un servicio externo.
 
-Diagrama de entidades:
+Diagrama de entidades: 📖
 
 ```
 +--------+       +------+       +---------+
@@ -61,7 +61,7 @@ Diagrama de entidades:
 +--------+       +------+       +---------+
 ```
 
-### 2.3. Clases Principales
+### 2.3. Clases Principales 💻
 
 - **`TwitterApplication`**: Clase principal que inicia la aplicación Spring Boot.
 - **`TwitterController`**: Controlador que maneja las solicitudes HTTP para crear y obtener posts.
@@ -69,13 +69,13 @@ Diagrama de entidades:
 - **`User`**: Representa a un usuario de la plataforma.
 - **`Stream`**: Contiene la lógica para gestionar el flujo de publicaciones.
 
- ### 2.4. Diagrama de Clase
+ ### 2.4. Diagrama de Clase 📊
 
   Este diagrama de clases representa la estructura de clases y sus relaciones dentro de una aplicación que simula un sistema similar a Twitter.
 
   ![image](https://github.com/user-attachments/assets/f23b25b5-f57f-4bdf-a6d4-568cb231cd02)
 
-  ### Descripción de las clases
+  ### Descripción de las clases 📊
 1. TwitterController:
 * Es la clase controladora de la aplicación que maneja las solicitudes HTTP.
 
@@ -121,7 +121,7 @@ Métodos de acceso (getUsername(), setUsername(), getId(), setId()) para obtener
 
 ---
 
-## 3. Pruebas del Proyecto
+## 3. Pruebas del Proyecto 📊
 
 ### 3.1. Pruebas Manuales
 
@@ -137,19 +137,19 @@ Métodos de acceso (getUsername(), setUsername(), getId(), setId()) para obtener
 
 ---
 
-## 4. Video de la Aplicación Funcionando
+### 4. Video de la Aplicación Funcionando 📊
 
 https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
 
 ---
-## 5. Seguridad con AWS Cognito
+## 5. Seguridad con AWS Cognito 📊
 1. Crear un usuario en AWS Cognito.
 2. Configurar el dominio y redirigir la URL de autenticación.
 3. Configurar los permisos de acceso a los endpoints protegidos.
 4. Enviar el token desde el frontend en las solicitudes HTTP mediante el header `Authorization: Bearer <token>`.
 
 ---
-## 6. Despliegue en AWS
+## 6. Despliegue en AWS 📊
 
 ### 6.1. Despliegue del Frontend en AWS S3
 1. Crear un bucket S3 y habilitar alojamiento web.
@@ -165,7 +165,7 @@ https://github.com/user-attachments/assets/992d84cc-572f-4bc9-89dc-49909474def1
 
 ---
 
-## 7. Separación en Microservicios
+## 7. Separación en Microservicios 📊
 1. Crear tres microservicios independientes:
    - **UserService**: Para gestionar usuarios.
    - **PostService**: Para crear y obtener posts.
@@ -187,14 +187,14 @@ https://github.com/user-attachments/assets/ff07d82e-6469-44d2-8bc4-4f197328db2c
 
 ---
 
-## 8. Pruebas Finales
+## 8. Pruebas Finales 📊
 1. Verificar que la autenticación funcione correctamente.
 2. Probar que las publicaciones solo se creen si el token es válido.
 3. Asegurar que la aplicación se despliegue y funcione correctamente desde AWS.
 
 ---
 
-## 9. Conclusión
+## 9. Conclusión 📊
 Este proyecto implementa un clon básico de Twitter con autenticación segura mediante AWS Cognito y un backend modular desplegado en AWS Lambda. La arquitectura permite escalabilidad y facilita la evolución futura de la aplicación.
 
 
