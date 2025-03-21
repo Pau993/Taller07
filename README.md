@@ -10,6 +10,8 @@
 
 Este proyecto es un clon básico de Twitter que permite a los usuarios crear publicaciones de hasta 140 caracteres y visualizarlas en un stream público. Se implementa utilizando Spring Boot para el backend y JavaScript para el frontend. El frontend se despliega en Amazon S3 para garantizar su disponibilidad en internet.
 
+![image](https://github.com/user-attachments/assets/39f6ce5a-eaeb-42fd-9f1f-2ab54fa65827)
+
 ---
 
 Para clonar el repositorio y ejecutarlo localmente:
@@ -215,6 +217,8 @@ https://github.com/user-attachments/assets/ff07d82e-6469-44d2-8bc4-4f197328db2c
 1. Verificar que la autenticación funcione correctamente.
 2. Probar que las publicaciones solo se creen si el token es válido.
 3. Asegurar que la aplicación se despliegue y funcione correctamente desde AWS.
+
+![image](https://github.com/user-attachments/assets/82b6d74a-34d3-4df8-928a-46c3a9695e61)
 
 ---
 
