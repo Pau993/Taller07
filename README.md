@@ -69,6 +69,56 @@ Diagrama de entidades:
 - **`User`**: Representa a un usuario de la plataforma.
 - **`Stream`**: Contiene la lógica para gestionar el flujo de publicaciones.
 
+ ### 2.4. Diagrama de Clase
+
+  Este diagrama de clases representa la estructura de clases y sus relaciones dentro de una aplicación que simula un sistema similar a Twitter.
+
+  ![image](https://github.com/user-attachments/assets/f23b25b5-f57f-4bdf-a6d4-568cb231cd02)
+
+  ### Descripción de las clases
+1. TwitterController:
+* Es la clase controladora de la aplicación que maneja las solicitudes HTTP.
+
+* Métodos:
+      * createPost(postRequest: PostRequest) : Post: Método para crear un nuevo post. Toma un PostRequest como parámetro (que contiene el texto y el nombre de usuario) y devuelve un objeto Post.
+      * getPosts() : List<Post>: Método que devuelve una lista de todos los posts disponibles.
+* Stream:
+* Representa el "stream" o flujo de publicaciones (como un feed de Twitter).
+* Atributos:
+      * stream: Es una colección interna de posts que forma parte del feed.
+* Métodos:
+   * addPost(post: Post) : void: Método para agregar un nuevo post al flujo de publicaciones.
+   * getPosts() : List<Post>: Método que devuelve la lista de posts actuales en el flujo.
+
+* Post:
+* Representa una publicación individual.
+* Atributos:
+id: Identificador único del post.
+text: El texto contenido en el post.
+user: Un objeto User que representa al usuario que creó el post.
+* Métodos:
+* Constructor Post(id: String, text: String, user: User): Constructor que inicializa un post con un ID, texto y un usuario.
+* Métodos de acceso (getId(), getText(), getUser() y sus respectivos setters) para obtener y modificar los atributos del post.
+
+* PostRequest:
+
+* Representa la solicitud de creación de un post. Es lo que se recibe en la API para crear un nuevo post.
+* Atributos:
+text: El texto del post.
+username: El nombre de usuario del autor del post.
+* Métodos:
+* Métodos de acceso (getText(), getUsername(), y sus setters) para obtener y establecer los valores del texto y el nombre de usuario.
+
+* User:
+
+* Representa un usuario en el sistema.
+* Atributos:
+username: El nombre de usuario.
+id: El identificador único del usuario.
+* Métodos:
+Métodos de acceso (getUsername(), setUsername(), getId(), setId()) para obtener y establecer los valores de nombre de usuario y ID.
+  
+
 ---
 
 ## 3. Pruebas del Proyecto
