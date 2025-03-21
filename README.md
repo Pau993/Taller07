@@ -40,6 +40,19 @@ El proyecto sigue un diseño monolítico en Spring Boot con un frontend estátic
 - `Post`: Representa una publicación de hasta 140 caracteres.
 - `Stream`: Almacena todos los posts creados.
 
+### 2.3. Diagrama de arquitectura
+
+![image](https://github.com/user-attachments/assets/0e53c26e-5d3e-4ce0-8d0c-1abab00ba260)
+
+El diagrama representa un flujo de interacción entre un usuario y un servicio web que involucra un controlador de Twitter, recursos en servidores y AWS Server Migration Service. A continuación, se detalla el flujo:
+
+* Usuario: Un usuario inicia la interacción desde su navegador web.
+* Navegador: El usuario accede a la URL http://localhost:8080, lo que sugiere que está probando el servicio en un entorno local.
+* TwitterController: Es un componente del backend que recibe la solicitud del usuario y gestiona la lógica de negocio. Es probable que sea un controlador en una aplicación basada en Spring Boot o similar.
+* Recursos: Este componente representa servidores o bases de datos donde se almacenan datos que pueden ser consultados por el TwitterController.
+AWS Server Migration Service: Se encarga de gestionar la migración de servidores y recursos hacia la nube de AWS.
+* Comunicación HTTP: Finalmente, la información es enviada mediante HTTP a otro servicio o sistema, posiblemente relacionado con Twitter o un servicio externo.
+
 Diagrama de entidades:
 
 ```
@@ -74,6 +87,8 @@ Diagrama de entidades:
 
 ---
 
+https://github.com/user-attachments/assets/2e734913-0225-4fd7-81df-5fb38f434bac
+
 ## 4. Video de la Aplicación Funcionando
 
 https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
@@ -105,7 +120,20 @@ https://github.com/user-attachments/assets/13e93789-e0a4-4643-8767-023684cfc3ba
    - **UserService**: Para gestionar usuarios.
    - **PostService**: Para crear y obtener posts.
    - **StreamService**: Para gestionar el flujo de publicaciones.
+Los Microservicios creados se generaron dentro de la carpeta Lambda, para una mejor organización y resdimiento.
 2. Utilizar Spring Cloud y AWS Lambda para desplegar cada microservicio.
+
+* UserService:
+
+https://github.com/user-attachments/assets/5ae5914f-c451-4994-b924-abba1a9fc448
+
+* PostService
+
+https://github.com/user-attachments/assets/24a1f6c4-5c5a-44d8-b4c4-cd4a3b17ee55
+
+* StreamService
+
+https://github.com/user-attachments/assets/ff07d82e-6469-44d2-8bc4-4f197328db2c
 
 ---
 
