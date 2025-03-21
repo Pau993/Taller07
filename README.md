@@ -75,6 +75,30 @@ Diagrama de entidades: 📖
 
   ![image](https://github.com/user-attachments/assets/f23b25b5-f57f-4bdf-a6d4-568cb231cd02)
 
+## TwitterController
+
+*  Actúa como el controlador principal del sistema.
+* Se relaciona con la clase Stream, lo que indica que usa un flujo de datos para manejar las publicaciones.
+
+## Stream
+
+* Se encarga de almacenar y gestionar publicaciones.
+* Tiene una relación de composición con la clase Post (*), lo que significa que puede contener múltiples publicaciones.
+
+## Post
+
+* Representa una publicación en el sistema.
+* Relación con User: Cada publicación está asociada a un usuario.
+
+## User
+
+* Representa a un usuario del sistema.
+* Relación con Post: Un usuario puede estar asociado a varias publicaciones.
+
+## PostRequest
+
+* Se usa para manejar las solicitudes de creación de publicaciones.
+
   ### Descripción de las clases 📊
 1. TwitterController:
 * Es la clase controladora de la aplicación que maneja las solicitudes HTTP.
