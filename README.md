@@ -1,6 +1,6 @@
 # Proyecto: Twitter Clone con Spring Boot y AWS 💻
 
-## Integrantes 🙆‍♀️
+## Integrantes 
 
 - Paula Natalia Paez Vega
 - Miguel Camilo Tellez Avila
