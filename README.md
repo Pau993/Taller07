@@ -99,7 +99,7 @@ Diagrama de entidades: 📖
 
 * Se usa para manejar las solicitudes de creación de publicaciones.
 
-  ### Descripción de las clases 📊
+# Descripción de las clases 📊
 1. TwitterController:
 * Es la clase controladora de la aplicación que maneja las solicitudes HTTP.
 
