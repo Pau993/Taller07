@@ -207,4 +207,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Agradecimientos 🎁
 
-Agradecimientos al profeso Daniel Benavides por brindarme sus conocimientos.
+Agradecimientos al profeso Daniel Benavides por brindarnos sus conocimientos.
