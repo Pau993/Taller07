@@ -12,7 +12,7 @@ Este proyecto es un clon básico de Twitter que permite a los usuarios crear pub
 
 ---
 
-Para clonar el repositorio y ejecutarlo localmente: ♣️
+Para clonar el repositorio y ejecutarlo localmente:
 
 ```sh
 git clone https://github.com/Pau993/Taller07.git
