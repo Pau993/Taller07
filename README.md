@@ -1,18 +1,18 @@
-# Proyecto: Twitter Clone con Spring Boot y AWS
+# Proyecto: Twitter Clone con Spring Boot y AWS 💻
 
-## Integrantes
+## Integrantes 🙆‍♀️
 
 - Paula Natalia Paez Vega
 - Miguel Camilo Tellez Avila
 - John Sebastian Sosa
 
-## Descripción del Proyecto
+## Descripción del Proyecto 📊
 
 Este proyecto es un clon básico de Twitter que permite a los usuarios crear publicaciones de hasta 140 caracteres y visualizarlas en un stream público. Se implementa utilizando Spring Boot para el backend y JavaScript para el frontend. El frontend se despliega en Amazon S3 para garantizar su disponibilidad en internet.
 
 ---
 
-Para clonar el repositorio y ejecutarlo localmente:
+Para clonar el repositorio y ejecutarlo localmente: ♣️
 
 ```sh
 git clone https://github.com/Pau993/Taller07.git
